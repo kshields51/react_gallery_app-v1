@@ -1,7 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+
+React.createElement(
+  'h1',
+  null,
+  "this is an element"
+)
+
+
+
+
+
+
+
+
+{/*import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
 class App extends Component {
   render() {
     return (
@@ -9,8 +24,9 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            Edit <code>src/App.js</code> and save to I EDITED THIS.
           </p>
+          <h1>THIS IS INSANNNNNNNE</h1>
           <a
             className="App-link"
             href="https://reactjs.org"
@@ -25,4 +41,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App;*/}
