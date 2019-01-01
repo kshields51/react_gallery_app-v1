@@ -14,7 +14,7 @@ import apiKey from '../config'
 {/* App Class which contains api data */}
  class App extends Component {
 
-  constructor() {
+  constructor() { //defines the initial state of App
       super();
       this.state = {
           pics: [],
@@ -24,13 +24,13 @@ import apiKey from '../config'
       }
   }
 // componentDidMount stores three initial api calls that will be mapped to the nav buttons
-  componentDidMount() {
-      axios.all([
+  componentDidMount() { //runs the below code when the page laods
+      axios.all([ //api calls using axios are stored in a list
           axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`),
           axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`),
           axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=computers&per_page=24&format=json&nojsoncallback=1`)
         ])
-      .then(axios.spread((dogResponse, catResponse, computerResponse) => {
+      .then(axios.spread((dogResponse, catResponse, computerResponse) => { // spread allows all three responses to be passed to the state objects
           this.setState({
               initialDogs: dogResponse.data.photos.photo,
               initialCats: catResponse.data.photos.photo,
@@ -38,8 +38,6 @@ import apiKey from '../config'
           })}))
           .catch(error => {
             console.log('Error fetching and parsing data', error);
-
-      
     })}
 
 //perform search uses interpolation to dynamically add whatever is typed into the search bar into the search call
@@ -60,13 +58,12 @@ import apiKey from '../config'
       return (
           <BrowserRouter>
           <div className="container">  
-            <Route path="/" render={() => <Header search={this.performSearch} /> } />
-            <Route path="/" component={Nav} />
-            <Route exact path="/search/:name" render={ () => <PhotoContainer data={this.state.pics} /> } />
-            <Route exact path="/button1/:name" render={ () => <PhotoContainer data={this.state.initialDogs} /> } />
-            <Route exact path="/button2/:name" render={ () => <PhotoContainer data={this.state.initialCats} /> } />
-            <Route exact path="/button3/:name" render={ () => <PhotoContainer data={this.state.initialComputer} /> } />
-          
+            <Route path="/" render={() => <Header search={this.performSearch} /> } /> {/* renders the Header component and passes the prop to enable the search bar to operate */}
+            <Route path="/" component={Nav} /> {/* renders the Nav component */}
+            <Route exact path="/search/:name" render={ () => <PhotoContainer data={this.state.pics} /> } /> {/* renders a page that matches whatever was searched */}
+            <Route exact path="/button1/:name" render={ () => <PhotoContainer data={this.state.initialDogs} /> } /> {/* renders when dogs is clicked */}
+            <Route exact path="/button2/:name" render={ () => <PhotoContainer data={this.state.initialCats} /> } /> {/* renders when cats is clicked */}
+            <Route exact path="/button3/:name" render={ () => <PhotoContainer data={this.state.initialComputer} /> } /> {/* renders when computers is clicked */}
           </div>
           </BrowserRouter>
       )

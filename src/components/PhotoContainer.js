@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 
 {/* this component holds all of the individual photos */}
 const PhotoContainer = ({data, match}) => {
-  let name = match.params.name;
+  let name = match.params.name; // a param that is used to dynamcally display a title for the results
     return (
         <div className="photo-container">
         <h2>{name}</h2>

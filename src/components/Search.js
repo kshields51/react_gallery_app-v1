@@ -12,12 +12,11 @@ export default class Search extends Component {
     }
 //upon submission this pushes the text to the history object so that the typed in text is reflected in the url
     handleSubmit = e => {
-        e.preventDefault();
-        this.props.search(this.state.searchText);
-        let path = `/search/${this.state.searchText}`;
-        console.log(this.state.searchText)
-        this.props.history.push(path);
-        e.currentTarget.reset();
+        e.preventDefault(); //prevents the browsers default page reload on submit
+        this.props.search(this.state.searchText); //
+        let path = `/search/${this.state.searchText}`; //adds the dynamically typed text to the path
+        this.props.history.push(path); //adds the text to the history stack
+        e.currentTarget.reset(); //makes the search box clear
     }
 //renders the search button to the page plugging in the methods that define the interactivity 
     render() {
