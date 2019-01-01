@@ -26,9 +26,9 @@ import apiKey from '../config'
 // componentDidMount stores three initial api calls that will be mapped to the nav buttons
   componentDidMount() {
       axios.all([
-          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=36a587004bd0a1575867ec43030a751d&tags=dogs&per_page=24&format=json&nojsoncallback=1'),
-          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=36a587004bd0a1575867ec43030a751d&tags=cats&per_page=24&format=json&nojsoncallback=1'),
-          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=36a587004bd0a1575867ec43030a751d&tags=computers&per_page=24&format=json&nojsoncallback=1')
+          axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`),
+          axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`),
+          axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=computers&per_page=24&format=json&nojsoncallback=1`)
         ])
       .then(axios.spread((dogResponse, catResponse, computerResponse) => {
           this.setState({
@@ -44,7 +44,7 @@ import apiKey from '../config'
 
 //perform search uses interpolation to dynamically add whatever is typed into the search bar into the search call
     performSearch = (query) =>{
-        axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=36a587004bd0a1575867ec43030a751d&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+        axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
             .then(response => {
                 this.setState({ //sets the state of pics to the custom search
                     pics: response.data.photos.photo
