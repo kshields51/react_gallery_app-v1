@@ -8,7 +8,6 @@ const PhotoContainer = ({data, match}) => {
   let name = match.params.name;
     return (
         <div className="photo-container">
-        <h2>Results</h2>
         <h2>{name}</h2>
         <ul>
           {/*the photos */}
@@ -25,7 +24,7 @@ const PhotoContainer = ({data, match}) => {
           }
           
           {/* NOT FOUND */}
-          <NotFound />
+          {/*<NotFound />*/}
         </ul>
       </div>
     )

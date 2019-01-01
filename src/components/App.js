@@ -8,6 +8,8 @@ import {
     Route,
     withRouter
 } from 'react-router-dom';
+import Search from './Search';
+import Nav from './Nav';
 
 
 
@@ -17,30 +19,58 @@ import {
   constructor() {
       super();
       this.state = {
-          pics: []
+          pics: [],
+          initialDogs: [],
+          initialCats: [],
+          initialComputer: []
       }
   }
 
   componentDidMount() {
-      axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=141d2d8437fd4d51e73bb648ff31a354&tags=sunsets&per_page=24&format=json&nojsoncallback=1')
-      .then(response => {
+      axios.all([
+          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ddafc92782f2f69806e6128ba4746325&tags=dogs&per_page=24&format=json&nojsoncallback=1'),
+          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ddafc92782f2f69806e6128ba4746325&tags=cats&per_page=24&format=json&nojsoncallback=1'),
+          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ddafc92782f2f69806e6128ba4746325&tags=computers&per_page=24&format=json&nojsoncallback=1')
+        ])
+      .then(axios.spread((dogResponse, catResponse, computerResponse) => {
           this.setState({
-              pics: response.data.photos.photo
+              initialDogs: dogResponse.data.photos.photo,
+              initialCats: catResponse.data.photos.photo,
+              initialComputer: computerResponse.data.photos.photo
+          })}))
+          .catch(error => {
+            console.log('Error fetching and parsing data', error);
+
+      
+    })}
+
+    performSearch(query){
+        axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=141d2d8437fd4d51e73bb648ff31a354&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+            .then(response => {
+                this.setState({
+                    pics: response.data.photos.photo
           })
 
       })
       .catch(error => {
           console.log('Error fetching and parsing data', error);
       });
-  }
+
+    }
 
   render() {
       return (
           <BrowserRouter>
           <div className="container">  
             <Route path="/" component={Header} />
-            <Route exact path="/" render={ () => <PhotoContainer data={this.state.pics} /> } /> 
+            <Route path="/" render={() => <Search search={this.performSearch()} /> } />
+            <Route path="/" component={Nav} />
+
+
             <Route path="/:name" render={ () => <PhotoContainer data={this.state.pics} /> } />
+            <Route path="/dogs" render={ () => <PhotoContainer data={this.state.initialDogs} /> } />
+            <Route path="/cats" render={ () => <PhotoContainer data={this.state.initialCats} /> } />
+            <Route path="/computers" render={ () => <PhotoContainer data={this.state.initialComputer} /> } />
           
           </div>
           </BrowserRouter>
