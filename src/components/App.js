@@ -14,6 +14,7 @@ import Nav from './Nav';
 
 
 
+
  class App extends Component {
 
   constructor() {
@@ -44,8 +45,8 @@ import Nav from './Nav';
       
     })}
 
-    performSearch(query){
-        axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=141d2d8437fd4d51e73bb648ff31a354&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    performSearch = (query) =>{
+        axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ddafc92782f2f69806e6128ba4746325&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
             .then(response => {
                 this.setState({
                     pics: response.data.photos.photo
@@ -63,14 +64,15 @@ import Nav from './Nav';
           <BrowserRouter>
           <div className="container">  
             <Route path="/" component={Header} />
-            <Route path="/" render={() => <Search search={this.performSearch()} /> } />
+            <Route path="/" render={() => <Search search={this.performSearch} /> } />
+            
             <Route path="/" component={Nav} />
 
 
             <Route path="/:name" render={ () => <PhotoContainer data={this.state.pics} /> } />
-            <Route path="/dogs" render={ () => <PhotoContainer data={this.state.initialDogs} /> } />
-            <Route path="/cats" render={ () => <PhotoContainer data={this.state.initialCats} /> } />
-            <Route path="/computers" render={ () => <PhotoContainer data={this.state.initialComputer} /> } />
+            <Route exact path="/dogs" render={ () => <PhotoContainer data={this.state.initialDogs} /> } />
+            <Route exact path="/cats" render={ () => <PhotoContainer data={this.state.initialCats} /> } />
+            <Route exact path="/computers" render={ () => <PhotoContainer data={this.state.initialComputer} /> } />
           
           </div>
           </BrowserRouter>
