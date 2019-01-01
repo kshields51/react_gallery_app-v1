@@ -1,3 +1,14 @@
+Hello all,
+
+Welcome, and thank you for taking a look at my gallery app. In order to use this app, you will need to create a config file that contains an api key generated from then non-commercial use Flickr api key generator. Once you have received your key, follow these instructions:
+
+1. Create a file in the root directory of the downloaded folder. Call this file "config.js".
+2. On the first line create a const variable named apiKey and set it equal to a string containing the key that was given to you by Flickr.
+3. On the second line type "export default apiKey;" (w/o quotes)
+4. Save the file
+
+Now you should be good to go!
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
