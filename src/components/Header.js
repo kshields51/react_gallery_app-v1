@@ -1,14 +1,15 @@
 import React from 'react';
+import Search from './Search'
+import {withRouter} from 'react-router-dom';
 
 
-const Header = () => {
+const Header = (props) => {
     return (
         <header>
         <h2>Search And Be Amazed!</h2>
-        {/*add the nav */}
-        {/*add the logo */}
+        <Search search={props.search} history={props.history}/>
         </header>        
     )
 }
 
-export default Header;
+export default withRouter(Header);

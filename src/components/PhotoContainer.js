@@ -1,6 +1,5 @@
 /* eslint-disable no-lone-blocks */
 import React from 'react';
-import NotFound from './NotFound';
 import PhotoCard from './PhotoCard';
 import {withRouter} from 'react-router-dom';
 

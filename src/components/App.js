@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 import Header from './Header';
 import PhotoContainer from './PhotoContainer';
-import apiKey from '../config';
 import axios from 'axios';
 import {
     BrowserRouter, 
     Route,
-    withRouter
 } from 'react-router-dom';
-import Search from './Search';
 import Nav from './Nav';
 
 
@@ -63,8 +60,7 @@ import Nav from './Nav';
       return (
           <BrowserRouter>
           <div className="container">  
-            <Route path="/" component={Header} />
-            <Route path="/" render={() => <Search search={this.performSearch} /> } />
+            <Route path="/" render={() => <Header search={this.performSearch} /> } />
             
             <Route path="/" component={Nav} />
 
