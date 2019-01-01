@@ -7,11 +7,11 @@ import {
     Route,
 } from 'react-router-dom';
 import Nav from './Nav';
+import apiKey from '../config'
 
+{/* this is the main app which holds, in state, all the data retrieved from the api */}
 
-
-
-
+{/* App Class which contains api data */}
  class App extends Component {
 
   constructor() {
@@ -23,12 +23,12 @@ import Nav from './Nav';
           initialComputer: []
       }
   }
-
+// componentDidMount stores three initial api calls that will be mapped to the nav buttons
   componentDidMount() {
       axios.all([
-          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ddafc92782f2f69806e6128ba4746325&tags=dogs&per_page=24&format=json&nojsoncallback=1'),
-          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ddafc92782f2f69806e6128ba4746325&tags=cats&per_page=24&format=json&nojsoncallback=1'),
-          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ddafc92782f2f69806e6128ba4746325&tags=computers&per_page=24&format=json&nojsoncallback=1')
+          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=36a587004bd0a1575867ec43030a751d&tags=dogs&per_page=24&format=json&nojsoncallback=1'),
+          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=36a587004bd0a1575867ec43030a751d&tags=cats&per_page=24&format=json&nojsoncallback=1'),
+          axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=36a587004bd0a1575867ec43030a751d&tags=computers&per_page=24&format=json&nojsoncallback=1')
         ])
       .then(axios.spread((dogResponse, catResponse, computerResponse) => {
           this.setState({
@@ -42,10 +42,11 @@ import Nav from './Nav';
       
     })}
 
+//perform search uses interpolation to dynamically add whatever is typed into the search bar into the search call
     performSearch = (query) =>{
-        axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ddafc92782f2f69806e6128ba4746325&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+        axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=36a587004bd0a1575867ec43030a751d&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
             .then(response => {
-                this.setState({
+                this.setState({ //sets the state of pics to the custom search
                     pics: response.data.photos.photo
           })
 
@@ -53,22 +54,18 @@ import Nav from './Nav';
       .catch(error => {
           console.log('Error fetching and parsing data', error);
       });
-
     }
-
+//renders paths to the page
   render() {
       return (
           <BrowserRouter>
           <div className="container">  
             <Route path="/" render={() => <Header search={this.performSearch} /> } />
-            
             <Route path="/" component={Nav} />
-
-
-            <Route path="/:name" render={ () => <PhotoContainer data={this.state.pics} /> } />
-            <Route exact path="/dogs" render={ () => <PhotoContainer data={this.state.initialDogs} /> } />
-            <Route exact path="/cats" render={ () => <PhotoContainer data={this.state.initialCats} /> } />
-            <Route exact path="/computers" render={ () => <PhotoContainer data={this.state.initialComputer} /> } />
+            <Route exact path="/search/:name" render={ () => <PhotoContainer data={this.state.pics} /> } />
+            <Route exact path="/button1/:name" render={ () => <PhotoContainer data={this.state.initialDogs} /> } />
+            <Route exact path="/button2/:name" render={ () => <PhotoContainer data={this.state.initialCats} /> } />
+            <Route exact path="/button3/:name" render={ () => <PhotoContainer data={this.state.initialComputer} /> } />
           
           </div>
           </BrowserRouter>

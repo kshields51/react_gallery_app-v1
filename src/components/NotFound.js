@@ -1,5 +1,5 @@
 import React from 'react';
-
+{/* this is currently not in use but will be completed at a later date... disregard */}
 const NotFound = () => {
     return (
         <li className="not-found">

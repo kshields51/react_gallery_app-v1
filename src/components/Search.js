@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 
+{/* this component executes a search and sends the info typed into the text field to the history object so that its injected into the url */}
 export default class Search extends Component {
 
     state = {
         searchText: ''
     }
-
+// sets the state to what is typed into the box
     onSearchChange = e => {
         this.setState({searchText: e.target.value});
     }
-
+//upon submission this pushes the text to the history object so that the typed in text is reflected in the url
     handleSubmit = e => {
         e.preventDefault();
         this.props.search(this.state.searchText);
-        let path = `/${this.state.searchText}`;
+        let path = `/search/${this.state.searchText}`;
         console.log(this.state.searchText)
         this.props.history.push(path);
         e.currentTarget.reset();
     }
-
+//renders the search button to the page plugging in the methods that define the interactivity 
     render() {
         return (
             <form className="search-form" onSubmit={this.handleSubmit}>
