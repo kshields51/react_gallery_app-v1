@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from './Search'
 import {withRouter} from 'react-router-dom';
-{/* This component renders the header which contains the title and search bar */}
+/* This component renders the header which contains the title and search bar */
 
 const Header = (props) => {
     return (
@@ -11,5 +11,5 @@ const Header = (props) => {
         </header>        
     )
 }
-
+//withRouter allows my match state to be passed down to PhotoContainer Shoutout to Bishop8119 for helping me with this
 export default withRouter(Header);

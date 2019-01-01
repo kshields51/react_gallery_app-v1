@@ -9,9 +9,9 @@ import {
 import Nav from './Nav';
 import apiKey from '../config'
 
-{/* this is the main app which holds, in state, all the data retrieved from the api */}
+/* this is the main app which holds, in state, all the data retrieved from the api */
 
-{/* App Class which contains api data */}
+/* App Class which contains api data */
  class App extends Component {
 
   constructor() { //defines the initial state of App
@@ -24,6 +24,7 @@ import apiKey from '../config'
       }
   }
 // componentDidMount stores three initial api calls that will be mapped to the nav buttons
+//Code for making multiple calls at once was adapted from https://github.com/axios/axios/issues/371
   componentDidMount() { //runs the below code when the page laods
       axios.all([ //api calls using axios are stored in a list
           axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`),

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-{/* This component contains the three navigation buttons that link to routes that render the three preloaded api call's data */}
+/* This component contains the three navigation buttons that link to routes that render the three preloaded api call's data */
 const Nav = () => {
     return(
         <nav className="main-nav">

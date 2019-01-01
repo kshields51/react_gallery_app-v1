@@ -9,6 +9,8 @@ Welcome, and thank you for taking a look at my gallery app. In order to use this
 
 Now you should be good to go!
 
+Thanks to @Lee V for helping me with the config file.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

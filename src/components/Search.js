@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-{/* this component executes a search and sends the info typed into the text field to the history object so that its injected into the url */}
+/* this component executes a search and sends the info typed into the text field to the history object so that its injected into the url */
 export default class Search extends Component {
 
     state = {
